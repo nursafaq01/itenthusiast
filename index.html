@@ -9,19 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
-            --glow-primary: #00f2ea; /* Cyan terang */
-            --glow-secondary: #c039ff; /* Ungu elektrik */
-            --glow-accent: #ffea00;  /* Kuning neon */
+            --glow-primary: #00f2ea; 
+            --glow-secondary: #c039ff; 
+            --glow-accent: #ffea00;  
             --bg-deep-space: #02040a;
             --bg-nebula: #080c17;
             --text-stellar: #f0f8ff;
-            --text-muted-galaxy: #94a3b8; /* Slate 400 */
+            --text-muted-galaxy: #94a3b8; 
             --border-color-light: rgba(0, 242, 234, 0.2);
-            --card-bg: rgba(10, 18, 38, 0.6); /* Background kartu lebih transparan */
+            --card-bg: rgba(10, 18, 38, 0.65); /* Sedikit lebih opaque untuk kontras teks */
         }
 
         body {
-            font-family: 'Inter', sans-serif; /* Fallback font */
+            font-family: 'Inter', sans-serif; 
             background-color: var(--bg-deep-space);
             color: var(--text-stellar);
             overflow-x: hidden;
@@ -31,7 +31,6 @@
         .font-orbitron { font-family: 'Orbitron', sans-serif; }
         .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
 
-        /* --- Plexus/Network Hero Background --- */
         #hero-plexus-container {
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -52,7 +51,7 @@
             text-shadow: 0 0 25px rgba(0, 242, 234, 0.3);
         }
         .hero-headline {
-            font-size: clamp(2rem, 8vw, 4.5rem); /* Disesuaikan untuk mobile yang lebih kecil */
+            font-size: clamp(2rem, 8vw, 4.5rem); 
             text-transform: uppercase;
             letter-spacing: 1.5px; 
             line-height: 1.1;
@@ -70,12 +69,11 @@
         }
         .hero-subheadline {
             font-family: 'Roboto Mono', monospace;
-            font-size: clamp(0.8rem, 3vw, 1.1rem); /* Disesuaikan untuk mobile */
+            font-size: clamp(0.8rem, 3vw, 1.1rem); 
             letter-spacing: 0.5px;
             text-shadow: 0 0 10px rgba(192, 57, 255, 0.5);
         }
 
-        /* --- Cyberpunk Header --- */
         header.sticky-header {
             background-color: rgba(2, 4, 10, 0.7); 
             backdrop-filter: blur(16px) saturate(180%); 
@@ -83,14 +81,14 @@
             box-shadow: 0 5px 35px rgba(0, 242, 234, 0.08); 
         }
 
-        /* --- Holographic Cards --- */
         .holographic-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color-light);
             border-radius: 1.5rem; 
             transform-style: preserve-3d;
             transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
-                        box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+                        box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.7s ease; /* Transisi border-color ditambahkan */
             position: relative;
             overflow: hidden;
             box-shadow: 0 10px 30px rgba(0,0,0,0.35); 
@@ -100,35 +98,34 @@
             position: absolute;
             top: 0; left: -100%;
             width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0, 242, 234, 0.12), transparent); 
-            transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); 
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 234, 0.1), transparent); /* Kilau lebih halus */
+            transition: transform 0.8s cubic-bezier(0.22, 0.61, 0.36, 1); /* Durasi kilau sedikit lebih lama */
             z-index: 1;
         }
         .holographic-card::after {
-            background: linear-gradient(90deg, transparent, rgba(192, 57, 255, 0.08), transparent);
-            transition-delay: 0.08s; 
+            background: linear-gradient(90deg, transparent, rgba(192, 57, 255, 0.06), transparent);
+            transition-delay: 0.1s; 
         }
-        .holographic-card:hover::before { transform: translateX(200%); }
-        .holographic-card:hover::after { transform: translateX(200%); }
+        .holographic-card:hover::before { transform: translateX(200%) skewX(-15deg); } /* Tambahan skewX pada kilau */
+        .holographic-card:hover::after { transform: translateX(200%) skewX(-15deg); }
 
         .holographic-card-content { position: relative; z-index: 2; }
         .holographic-card:hover {
             transform: translateY(-25px) rotateX(12deg) rotateY(6deg) scale(1.1); 
             box-shadow: 0 45px 80px -20px rgba(0,0,0,0.5), 
-                        0 0 35px -8px var(--glow-primary);
-            border-color: rgba(0, 242, 234, 0.4); 
+                        0 0 40px -10px var(--glow-primary); /* Shadow glow diperkuat */
+            border-color: rgba(0, 242, 234, 0.5); 
         }
         .card-icon-futuristic {
             transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
             filter: drop-shadow(0 0 8px var(--glow-primary)); 
-            font-size: 3rem; /* Sedikit dikecilkan untuk mobile */
+            font-size: 3rem; 
         }
         .holographic-card:hover .card-icon-futuristic {
-            transform: scale(1.25) rotate(-8deg) translateY(-6px);
-            filter: drop-shadow(0 0 18px var(--glow-primary)) drop-shadow(0 0 8px var(--glow-accent));
+            transform: scale(1.3) rotate(-10deg) translateY(-8px); /* Hover ikon lebih dinamis */
+            filter: drop-shadow(0 0 20px var(--glow-primary)) drop-shadow(0 0 12px var(--glow-accent));
         }
 
-        /* --- Quantum Buttons --- */
         .btn-quantum {
             background-size: 300% 100%;
             transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
@@ -192,7 +189,6 @@
             box-shadow: 0 0 28px 0px #25D366, 0 0 18px 0px #128C7E inset;
         }
 
-        /* --- Data Stream Section Title --- */
         .section-title-futuristic {
             position: relative;
             padding-bottom: 25px;
@@ -201,38 +197,40 @@
             font-family: 'Orbitron', sans-serif;
             text-transform: uppercase;
             letter-spacing: 1.5px; 
-            font-size: clamp(1.5rem, 5vw, 2.6rem); /* Disesuaikan untuk mobile */
+            font-size: clamp(1.5rem, 5vw, 2.6rem); 
         }
-        .section-title-futuristic::before, .section-title-futuristic::after {
-            content: '';
+        .section-title-futuristic .title-line { /* Kelas untuk garis animasi */
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 2px;
-            filter: drop-shadow(0 0 8px var(--glow-primary)); 
-            animation: pulseBorder 2.5s infinite alternate; 
-        }
-        .section-title-futuristic::before { 
-            top: -15px; width: 50px; height: 2px; 
-            background: var(--glow-primary);
-        }
-        .section-title-futuristic::after { 
-            bottom: 0; width: 130px; height: 4px; 
             background: linear-gradient(90deg, var(--glow-primary), var(--glow-secondary));
+            filter: drop-shadow(0 0 8px var(--glow-primary));
+            transform-origin: center;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: scaleX(0); /* Mulai dari skala 0 */
         }
-        @keyframes pulseBorder {
-            0% { filter: drop-shadow(0 0 6px var(--glow-primary)); opacity: 0.6; }
-            100% { filter: drop-shadow(0 0 12px var(--glow-secondary)); opacity: 1; }
+        .section-title-futuristic.revealed .title-line {
+            transform: scaleX(1) translateX(-50%); /* Animasi ke skala 1 */
         }
+        .section-title-futuristic .title-line-top { 
+            top: -15px; width: 50px; height: 2px; 
+            background: var(--glow-primary); /* Garis atas warna solid */
+        }
+        .section-title-futuristic .title-line-bottom { 
+            bottom: 0; width: 130px; height: 4px; 
+        }
+        /* Hapus animasi pulseBorder karena akan diganti dengan animasi draw */
+        /* @keyframes pulseBorder { ... } */
 
-        /* --- Glitch Nav Link --- */
+
         .nav-link-futuristic {
             transition: color 0.3s ease, transform 0.3s ease; 
             position: relative;
             padding: 10px 8px;
             font-family: 'Roboto Mono', monospace;
             text-transform: uppercase;
-            font-size: 0.8rem; /* Disesuaikan untuk mobile */
+            font-size: 0.8rem; 
             letter-spacing: 0.8px;
         }
         .nav-link-futuristic .nav-text { position: relative; z-index: 1;}
@@ -265,17 +263,15 @@
             80% { clip-path: inset(30% 0 60% 0); } 100% { clip-path: inset(80% 0 15% 0); }
         }
 
-
-        /* --- Animated Floating WA Button --- */
         .floating-wa-futuristic {
-            position: fixed; bottom: 20px; right: 20px; z-index: 1000; /* Posisi disesuaikan untuk mobile */
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000; 
             animation: scanWaButton 2.8s infinite linear; 
             border-radius: 50%;
         }
         .floating-wa-futuristic::before { 
             content: '';
             position: absolute;
-            inset: -6px; /* Disesuaikan */
+            inset: -6px; 
             border: 1.5px solid var(--glow-primary); 
             border-radius: 50%;
             opacity: 0;
@@ -290,7 +286,6 @@
             70%, 100% { transform: scale(1.4); opacity: 0; }
         }
 
-        /* --- Abstract Particles --- */
         .abstract-particles { 
             position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;
         }
@@ -310,8 +305,6 @@
             100% { transform: translateY(20vh) translateX(0vw) scale(0.5) rotate(0deg); opacity: 0; }
         }
 
-
-        /* --- Hyperdrive Scrollbar --- */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: var(--bg-deep-space); }
         ::-webkit-scrollbar-thumb {
@@ -320,7 +313,6 @@
             box-shadow: 0 0 5px var(--glow-primary) inset;
         }
 
-        /* --- "About Us" Image Portal Effect --- */
         .about-image-portal {
             position: relative;
             filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); 
@@ -338,7 +330,6 @@
             border-color: rgba(0, 242, 234, 0.6);
         }
 
-        /* --- Section Styling --- */
         #layanan { background-color: var(--bg-nebula); }
         #tentang { background-color: var(--bg-deep-space); }
         #gabung {
@@ -363,16 +354,19 @@
 <body class="antialiased">
 
     <header class="sticky-header sticky top-0 z-50">
-        <div class="container mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
-            <a href="#hero" class="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse text-2xl sm:text-3xl font-orbitron font-bold text-white">
-                <img src="logo.jpg" class="h-6 sm:h-8" alt="Logo IT Enthusiast" /> <span>IT <span class="text-[var(--glow-primary)]">Enthusiast</span></span>
+        <div class="container mx-auto px-4 sm:px-6 py-3 flex justify-between items-center"> 
+            <a href="#hero" class="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse text-xl sm:text-2xl lg:text-3xl font-orbitron font-bold text-white"> 
+                <img src="logo.jpg" class="h-8 sm:h-10 lg:h-10" alt="Logo IT Enthusiast" /> 
+                <span>IT <span class="text-[var(--glow-primary)]">Enthusiast</span></span>
             </a>
-            <nav class="hidden md:flex space-x-5 lg:space-x-6"> <a href="#hero" class="nav-link-futuristic text-gray-300" data-text="Beranda"><span class="nav-text">Beranda</span></a>
+            <nav class="hidden md:flex space-x-5 lg:space-x-6"> 
+                <a href="#hero" class="nav-link-futuristic text-gray-300" data-text="Beranda"><span class="nav-text">Beranda</span></a>
                 <a href="#layanan" class="nav-link-futuristic text-gray-300" data-text="Layanan"><span class="nav-text">Layanan</span></a>
                 <a href="#tentang" class="nav-link-futuristic text-gray-300" data-text="Tentang Kami"><span class="nav-text">Tentang Kami</span></a>
                 <a href="#gabung" class="nav-link-futuristic text-gray-300" data-text="Gabung"><span class="nav-text">Gabung</span></a>
             </nav>
-            <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="hidden md:inline-block btn-whatsapp-futuristic btn-quantum font-semibold px-5 py-2.5 lg:px-7 lg:py-3 rounded-lg text-xs sm:text-sm"> <span class="btn-text"><i class="fab fa-whatsapp mr-1.5 sm:mr-2"></i>Kontak Kami</span>
+            <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="hidden md:inline-block btn-whatsapp-futuristic btn-quantum font-semibold px-5 py-2.5 lg:px-7 lg:py-3 rounded-lg text-xs sm:text-sm"> 
+                <span class="btn-text"><i class="fab fa-whatsapp mr-1.5 sm:mr-2"></i>Kontak Kami</span>
                 <span class="btn-flare"></span>
             </a>
             <button id="mobileMenuButton" class="md:hidden text-gray-200 focus:outline-none">
@@ -391,7 +385,8 @@
         </div>
     </header>
 
-    <section id="hero" class="hero-section text-white px-4 sm:px-6"> <canvas id="hero-plexus-container"></canvas>
+    <section id="hero" class="hero-section text-white px-4 sm:px-6"> 
+        <canvas id="hero-plexus-container"></canvas>
         <div class="abstract-particles" id="abstract-particles-container"></div>
         <div class="hero-content max-w-5xl mx-auto text-center"> 
             <h1 id="heroHeadline" class="hero-headline font-orbitron font-black mb-8 sm:mb-10">
@@ -406,25 +401,31 @@
         </div>
     </section>
 
-    <section id="layanan" class="py-24 md:py-36"> <div class="container mx-auto px-4 sm:px-6">
-            <h2 class="section-title-futuristic text-center mb-20 md:mb-28 scroll-reveal-futuristic">Dimensi Keahlian Kami</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-14"> <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.1s;">
+    <section id="layanan" class="py-24 md:py-36"> 
+        <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="section-title-futuristic text-center mb-20 md:mb-28 scroll-reveal-futuristic">
+                Dimensi Keahlian Kami
+                <span class="title-line title-line-top"></span>
+                <span class="title-line title-line-bottom"></span>
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-14"> 
+                <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.1s;">
                     <div class="holographic-card-content">
-                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-atom-simple"></i></div>
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-network-wired"></i></div>
                         <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">Jaringan & Infrastruktur</h3>
                         <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Arsitektur P2P, blockchain, dan simulasi jaringan masa depan.</p>
                     </div>
                 </div>
                 <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.25s;">
                      <div class="holographic-card-content">
-                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-brain-circuit"></i></div>
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-robot"></i></div>
                         <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">AI & Machine Learning</h3>
                         <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Model generatif, seni AI, dan sistem AI yang mampu belajar adaptif.</p>
                     </div>
                 </div>
                 <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.4s;">
                      <div class="holographic-card-content">
-                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-shield-keyhole"></i></div>
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-shield-alt"></i></div>
                         <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">Keamanan Siber</h3>
                         <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Zero Trust Architecture, kriptografi modern, dan Threat Intelligence.</p>
                     </div>
@@ -447,7 +448,11 @@
                     <img src="https://placehold.co/600x450/02040a/00f2ea?text=IE+Core" alt="Ilustrasi Inti Komunitas IT Enthusiast" class="about-image-futuristic w-full h-auto object-cover">
                 </div>
                 <div class="md:w-1/2 text-center md:text-left">
-                    <h2 class="section-title-futuristic mb-10 md:mb-14 text-center md:text-left scroll-reveal-futuristic">Manifesto Kami: Meretas Masa Depan</h2>
+                    <h2 class="section-title-futuristic mb-10 md:mb-14 text-center md:text-left scroll-reveal-futuristic">
+                        Manifesto Kami: Meretas Masa Depan
+                        <span class="title-line title-line-top"></span>
+                        <span class="title-line title-line-bottom"></span>
+                    </h2>
                     <p class="text-[var(--text-muted-galaxy)] mb-6 sm:mb-7 text-sm sm:text-base leading-relaxed font-roboto-mono scroll-reveal-futuristic" style="transition-delay: 0.2s;">
                         IT Enthusiast adalah sebuah kolektif para perintis, inovator, dan pembelajar seumur hidup yang berdedikasi untuk membentuk lanskap teknologi hari esok. Kami bukan hanya mengikuti tren; kami menciptakannya.
                     </p>
@@ -471,7 +476,11 @@
                 <i class="fas fa-qrcode text-7xl sm:text-8xl text-[var(--glow-accent)]"></i>
                 <span class="block text-xs font-roboto-mono mt-2 text-[var(--text-muted-galaxy)]">// DECODE_YOUR_FUTURE</span>
             </div>
-            <h2 class="section-title-futuristic mb-8 sm:mb-9 scroll-reveal-futuristic">Aktifkan Potensi Anda. Gabung IT Enthusiast.</h2>
+            <h2 class="section-title-futuristic mb-8 sm:mb-9 scroll-reveal-futuristic">
+                Aktifkan Potensi Anda. Gabung IT Enthusiast.
+                <span class="title-line title-line-top"></span>
+                <span class="title-line title-line-bottom"></span>
+            </h2>
             <p class="text-sm sm:text-base md:text-lg text-[var(--text-muted-galaxy)] mb-12 sm:mb-14 max-w-3xl mx-auto leading-relaxed font-roboto-mono scroll-reveal-futuristic" style="transition-delay: 0.2s;">
                 Pintu menuju singularitas teknologi berikutnya terbuka. Apakah Anda siap melangkah? Bergabunglah dengan jaringan para pemikir dan pembangun masa depan.
             </p>
@@ -527,35 +536,75 @@
         const currentYearElement = document.getElementById('currentYear');
         if (currentYearElement) currentYearElement.textContent = new Date().getFullYear();
 
-        // Plexus Network Background for Hero
+        // Plexus Network Background for Hero with Mouse Interaction
         const canvas = document.getElementById('hero-plexus-container');
         if (canvas) {
             const ctx = canvas.getContext('2d');
             let particlesArray;
+            const mouse = { x: null, y: null, radius: 75 }; // Radius interaksi mouse
 
-            // Debounce resize function
+            window.addEventListener('mousemove', (event) => {
+                mouse.x = event.clientX;
+                mouse.y = event.clientY;
+            });
+            window.addEventListener('mouseout', () => { // Reset posisi mouse jika keluar window
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+
             let resizeTimeout;
             function debouncedResize() {
                 canvas.width = window.innerWidth;
                 canvas.height = window.innerHeight;
                 initPlexus();
             }
-
             window.addEventListener('resize', () => {
                 clearTimeout(resizeTimeout);
-                resizeTimeout = setTimeout(debouncedResize, 100); // Adjust debounce delay as needed
+                resizeTimeout = setTimeout(debouncedResize, 100); 
             });
-
 
             class ParticlePlexus {
                 constructor(x, y) {
                     this.x = x; this.y = y;
+                    this.originX = x; // Simpan posisi awal
+                    this.originY = y;
                     this.size = Math.random() * 1.5 + 0.5; 
-                    this.speedX = Math.random() * 0.25 - 0.125; // Kecepatan lebih lambat lagi
+                    this.speedX = Math.random() * 0.25 - 0.125; 
                     this.speedY = Math.random() * 0.25 - 0.125;
                     this.color = 'rgba(0, 242, 234, 0.4)'; 
+                    this.density = (Math.random() * 30) + 1; // Untuk efek dorongan mouse
                 }
                 update() {
+                    // Interaksi mouse: dorong partikel menjauh
+                    if (mouse.x != null && mouse.y != null) {
+                        let dx = mouse.x - this.x;
+                        let dy = mouse.y - this.y;
+                        let distance = Math.sqrt(dx * dx + dy * dy);
+                        let forceDirectionX = dx / distance;
+                        let forceDirectionY = dy / distance;
+                        let maxDistance = mouse.radius;
+                        // Semakin dekat, semakin kuat dorongan (tapi tidak terlalu kuat)
+                        let force = (maxDistance - distance) / maxDistance; 
+                        let directionCheck = ((forceDirectionX * this.speedX) + (forceDirectionY * this.speedY));
+                        
+                        if (distance < mouse.radius) {
+                            this.x -= forceDirectionX * force * this.density * 0.03; // Faktor dorongan kecil
+                            this.y -= forceDirectionY * force * this.density * 0.03;
+                        } else {
+                            // Kembali ke posisi awal secara perlahan jika tidak ada interaksi mouse
+                            if (this.x !== this.originX) {
+                                let dxOrigin = this.originX - this.x;
+                                this.x += dxOrigin / 20; // Faktor kembali lambat
+                            }
+                            if (this.y !== this.originY) {
+                                let dyOrigin = this.originY - this.y;
+                                this.y += dyOrigin / 20;
+                            }
+                        }
+                    }
+
+
                     if (this.x + this.size > canvas.width || this.x - this.size < 0) this.speedX = -this.speedX;
                     if (this.y + this.size > canvas.height || this.y - this.size < 0) this.speedY = -this.speedY;
                     this.x += this.speedX; this.y += this.speedY;
@@ -564,8 +613,8 @@
 
             function initPlexus() {
                 particlesArray = [];
-                let baseParticleDensity = 25000; // Higher number = fewer particles
-                if (window.innerWidth < 768) { // Fewer particles on mobile
+                let baseParticleDensity = 25000; 
+                if (window.innerWidth < 768) { 
                     baseParticleDensity = 35000;
                 }
                 let numberOfParticles = (canvas.height * canvas.width) / baseParticleDensity; 
@@ -578,16 +627,16 @@
 
             function connectPlexus() {
                 let opacityValue = 1;
-                let connectionDistanceFactor = window.innerWidth < 768 ? 12 : 10; // Shorter connection distance on mobile
+                let connectionDistanceFactor = window.innerWidth < 768 ? 12 : 10; 
                 for (let a = 0; a < particlesArray.length; a++) {
                     for (let b = a; b < particlesArray.length; b++) {
                         let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
                                      + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
                         
                         if (distance < (canvas.width / connectionDistanceFactor) * (canvas.height / connectionDistanceFactor)) { 
-                            opacityValue = 1 - (distance / 22000); // Opasitas garis disesuaikan
-                            ctx.strokeStyle = `rgba(0, 242, 234, ${opacityValue * 0.12})`; // Garis lebih halus lagi
-                            ctx.lineWidth = 0.25; // Garis sangat tipis
+                            opacityValue = 1 - (distance / 22000); 
+                            ctx.strokeStyle = `rgba(0, 242, 234, ${opacityValue * 0.12})`; 
+                            ctx.lineWidth = 0.25; 
                             ctx.beginPath();
                             ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
                             ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
@@ -598,17 +647,16 @@
             }
             
             let lastFrameTime = 0;
-            const targetFrameTime = 1000 / 45; // Target 45 FPS
+            const targetFrameTime = 1000 / 45; 
 
             function animatePlexus(currentTime) {
                 requestAnimationFrame(animatePlexus);
                 const deltaTime = currentTime - lastFrameTime;
 
                 if (deltaTime < targetFrameTime) {
-                    return; // Skip frame if too soon
+                    return; 
                 }
                 lastFrameTime = currentTime - (deltaTime % targetFrameTime);
-
 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 for (let i = 0; i < particlesArray.length; i++) {
@@ -617,7 +665,6 @@
                 connectPlexus();
             }
             
-            // Initial setup
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
             initPlexus();
@@ -628,7 +675,7 @@
         // Abstract Particles
         const abstractParticlesContainer = document.getElementById('abstract-particles-container');
         if (abstractParticlesContainer) {
-            const numAbstractParticles = window.innerWidth < 768 ? 15 : 25; // Fewer on mobile
+            const numAbstractParticles = window.innerWidth < 768 ? 15 : 25; 
             for (let i = 0; i < numAbstractParticles; i++) {
                 let p = document.createElement('div');
                 p.classList.add('abstract-particle');
@@ -657,19 +704,21 @@
             ).join('');
 
             const chars = heroHeadline.querySelectorAll('.char');
-            if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) { // Cek preferensi animasi
+            if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) { 
                 chars.forEach((char, i) => {
-                    const delay = i * 50 + Math.random() * 70 + 200; // Delay sedikit lebih cepat
+                    const delay = i * 50 + Math.random() * 70 + 200; 
                     setTimeout(() => {
                         char.style.opacity = '1';
                         char.style.transform = 'translateY(0) skewY(0deg) scale(1)';
+                        // Efek kedipan singkat saat muncul dengan warna aksen
                         char.animate([
-                            { opacity: 0, filter: 'blur(3px)' }, 
-                            { opacity: 1, filter: 'blur(0)' }
-                        ], { duration: 300, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }); 
+                            { opacity: 0, filter: 'blur(3px)', color: 'var(--glow-accent)' }, 
+                            { opacity: 0.5, color: 'var(--glow-accent)', offset: 0.1},
+                            { opacity: 1, filter: 'blur(0)', color: 'var(--text-stellar)' }
+                        ], { duration: 400, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }); 
                     }, delay);
                 });
-            } else { // Jika pengguna preferensi reduced motion
+            } else { 
                 chars.forEach(char => {
                     char.style.opacity = '1';
                     char.style.transform = 'translateY(0) skewY(0deg) scale(1)';
@@ -686,25 +735,63 @@
                     if (entry.isIntersecting) {
                         if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
                             entry.target.classList.add('revealed');
+                            // Animate section title lines if it's a section title
+                            if (entry.target.classList.contains('section-title-futuristic')) {
+                                const lines = entry.target.querySelectorAll('.title-line');
+                                lines.forEach((line, index) => {
+                                    setTimeout(() => {
+                                        line.style.transform = 'scaleX(1) translateX(-50%)';
+                                    }, index * 150); // Delay untuk animasi berurutan
+                                });
+                            }
                         } else {
                             entry.target.style.opacity = '1';
                             entry.target.style.transform = 'translateY(0)';
+                             if (entry.target.classList.contains('section-title-futuristic')) {
+                                const lines = entry.target.querySelectorAll('.title-line');
+                                lines.forEach(line => {
+                                    line.style.transform = 'scaleX(1) translateX(-50%)';
+                                });
+                            }
                         }
+                    } else {
+                        // Opsional: Reset animasi jika keluar dari viewport (mungkin tidak diinginkan untuk judul)
+                        // if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+                        //     if (entry.target.classList.contains('section-title-futuristic')) {
+                        //         const lines = entry.target.querySelectorAll('.title-line');
+                        //         lines.forEach(line => {
+                        //             line.style.transform = 'scaleX(0) translateX(-50%)';
+                        //         });
+                        //     }
+                        // }
                     }
                 });
-            }, { threshold: 0.05 }); // Threshold lebih kecil agar animasi lebih cepat terlihat di mobile
+            }, { threshold: 0.1 }); // Threshold dinaikkan sedikit agar animasi judul tidak terlalu cepat
+            
             revealElements.forEach(el => {
                 if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
-                     el.style.opacity = '1'; // Tampilkan langsung jika reduced motion
+                     el.style.opacity = '1'; 
                      el.style.transform = 'translateY(0)';
+                     if (el.classList.contains('section-title-futuristic')) {
+                        const lines = el.querySelectorAll('.title-line');
+                        lines.forEach(line => {
+                            line.style.transform = 'scaleX(1) translateX(-50%)';
+                        });
+                    }
                 } else {
                     observer.observe(el);
                 }
             });
-        } else { // Fallback jika IO tidak didukung
+        } else { 
             document.querySelectorAll('.scroll-reveal-futuristic').forEach(el => {
                 el.style.opacity = '1';
                 el.style.transform = 'translateY(0)';
+                 if (el.classList.contains('section-title-futuristic')) {
+                    const lines = el.querySelectorAll('.title-line');
+                    lines.forEach(line => {
+                        line.style.transform = 'scaleX(1) translateX(-50%)';
+                    });
+                }
             });
         }
 
