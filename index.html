@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT Enthusiast: Digital Frontier - Jaringan Inovasi Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Roboto+Mono:wght@300;400;500&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --glow-primary: #00f2ea; /* Cyan terang */
+            --glow-secondary: #c039ff; /* Ungu elektrik */
+            --glow-accent: #ffea00;  /* Kuning neon */
+            --bg-deep-space: #02040a;
+            --bg-nebula: #080c17;
+            --text-stellar: #f0f8ff;
+            --text-muted-galaxy: #94a3b8; /* Slate 400 */
+            --border-color-light: rgba(0, 242, 234, 0.2);
+            --card-bg: rgba(10, 18, 38, 0.6); /* Background kartu lebih transparan */
+        }
+
+        body {
+            font-family: 'Inter', sans-serif; /* Fallback font */
+            background-color: var(--bg-deep-space);
+            color: var(--text-stellar);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        .font-orbitron { font-family: 'Orbitron', sans-serif; }
+        .font-roboto-mono { font-family: 'Roboto Mono', monospace; }
+
+        /* --- Plexus/Network Hero Background --- */
+        #hero-plexus-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .hero-section {
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(ellipse at center, rgba(2,4,10,0.8) 0%, var(--bg-deep-space) 70%);
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-shadow: 0 0 25px rgba(0, 242, 234, 0.3);
+        }
+        .hero-headline {
+            font-size: clamp(2rem, 8vw, 4.5rem); /* Disesuaikan untuk mobile yang lebih kecil */
+            text-transform: uppercase;
+            letter-spacing: 1.5px; 
+            line-height: 1.1;
+        }
+        .hero-headline .char { 
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(30px) skewY(8deg) scale(0.85); 
+            transition: opacity 0.7s ease, transform 0.7s ease; 
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .hero-headline .word {
+            display: inline-block; 
+            margin-right: 0.2em; 
+        }
+        .hero-subheadline {
+            font-family: 'Roboto Mono', monospace;
+            font-size: clamp(0.8rem, 3vw, 1.1rem); /* Disesuaikan untuk mobile */
+            letter-spacing: 0.5px;
+            text-shadow: 0 0 10px rgba(192, 57, 255, 0.5);
+        }
+
+        /* --- Cyberpunk Header --- */
+        header.sticky-header {
+            background-color: rgba(2, 4, 10, 0.7); 
+            backdrop-filter: blur(16px) saturate(180%); 
+            border-bottom: 1px solid var(--border-color-light);
+            box-shadow: 0 5px 35px rgba(0, 242, 234, 0.08); 
+        }
+
+        /* --- Holographic Cards --- */
+        .holographic-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color-light);
+            border-radius: 1.5rem; 
+            transform-style: preserve-3d;
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), 
+                        box-shadow 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.35); 
+        }
+        .holographic-card::before, .holographic-card::after { 
+            content: "";
+            position: absolute;
+            top: 0; left: -100%;
+            width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 242, 234, 0.12), transparent); 
+            transition: transform 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); 
+            z-index: 1;
+        }
+        .holographic-card::after {
+            background: linear-gradient(90deg, transparent, rgba(192, 57, 255, 0.08), transparent);
+            transition-delay: 0.08s; 
+        }
+        .holographic-card:hover::before { transform: translateX(200%); }
+        .holographic-card:hover::after { transform: translateX(200%); }
+
+        .holographic-card-content { position: relative; z-index: 2; }
+        .holographic-card:hover {
+            transform: translateY(-25px) rotateX(12deg) rotateY(6deg) scale(1.1); 
+            box-shadow: 0 45px 80px -20px rgba(0,0,0,0.5), 
+                        0 0 35px -8px var(--glow-primary);
+            border-color: rgba(0, 242, 234, 0.4); 
+        }
+        .card-icon-futuristic {
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+            filter: drop-shadow(0 0 8px var(--glow-primary)); 
+            font-size: 3rem; /* Sedikit dikecilkan untuk mobile */
+        }
+        .holographic-card:hover .card-icon-futuristic {
+            transform: scale(1.25) rotate(-8deg) translateY(-6px);
+            filter: drop-shadow(0 0 18px var(--glow-primary)) drop-shadow(0 0 8px var(--glow-accent));
+        }
+
+        /* --- Quantum Buttons --- */
+        .btn-quantum {
+            background-size: 300% 100%;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); 
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            border: 1px solid transparent; 
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-family: 'Orbitron', sans-serif;
+        }
+        .btn-quantum::before { 
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border-radius: inherit;
+            border: 2px solid transparent;
+            background: linear-gradient(var(--glow-primary), var(--glow-secondary)) border-box;
+            -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: destination-out;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        .btn-quantum:hover::before { opacity: 1; }
+        .btn-quantum .btn-text { position: relative; z-index: 2; }
+        .btn-quantum .btn-flare { 
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 0; height: 0;
+            background-color: rgba(255, 255, 255, 0.25); 
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            transition: width 0.5s ease, height 0.5s ease, opacity 0.5s ease; 
+        }
+        .btn-quantum:hover .btn-flare {
+            width: 200%; height: 200%;
+            opacity: 1;
+            transition: width 0.7s ease, height 0.7s ease, opacity 0.3s ease 0.15s; 
+        }
+
+        .btn-primary-futuristic {
+            background-image: linear-gradient(120deg, var(--glow-primary) 0%, var(--glow-secondary) 50%, var(--glow-primary) 100%);
+            color: var(--bg-deep-space);
+            box-shadow: 0 0 18px -5px var(--glow-primary), 0 0 12px -5px var(--glow-secondary) inset; 
+        }
+        .btn-primary-futuristic:hover {
+            background-position: right center;
+            transform: translateY(-5px) scale(1.06); 
+            box-shadow: 0 0 28px 0px var(--glow-primary), 0 0 18px 0px var(--glow-secondary) inset;
+        }
+        .btn-whatsapp-futuristic {
+            background-image: linear-gradient(120deg, #25D366 0%, #128C7E 50%, #1FAF38 100%);
+            color: white;
+            box-shadow: 0 0 18px -5px #25D366, 0 0 12px -5px #128C7E inset;
+        }
+        .btn-whatsapp-futuristic:hover {
+            background-position: right center;
+            transform: translateY(-5px) scale(1.06);
+            box-shadow: 0 0 28px 0px #25D366, 0 0 18px 0px #128C7E inset;
+        }
+
+        /* --- Data Stream Section Title --- */
+        .section-title-futuristic {
+            position: relative;
+            padding-bottom: 25px;
+            margin-bottom: 40px;
+            color: var(--text-stellar);
+            font-family: 'Orbitron', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1.5px; 
+            font-size: clamp(1.5rem, 5vw, 2.6rem); /* Disesuaikan untuk mobile */
+        }
+        .section-title-futuristic::before, .section-title-futuristic::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+            filter: drop-shadow(0 0 8px var(--glow-primary)); 
+            animation: pulseBorder 2.5s infinite alternate; 
+        }
+        .section-title-futuristic::before { 
+            top: -15px; width: 50px; height: 2px; 
+            background: var(--glow-primary);
+        }
+        .section-title-futuristic::after { 
+            bottom: 0; width: 130px; height: 4px; 
+            background: linear-gradient(90deg, var(--glow-primary), var(--glow-secondary));
+        }
+        @keyframes pulseBorder {
+            0% { filter: drop-shadow(0 0 6px var(--glow-primary)); opacity: 0.6; }
+            100% { filter: drop-shadow(0 0 12px var(--glow-secondary)); opacity: 1; }
+        }
+
+        /* --- Glitch Nav Link --- */
+        .nav-link-futuristic {
+            transition: color 0.3s ease, transform 0.3s ease; 
+            position: relative;
+            padding: 10px 8px;
+            font-family: 'Roboto Mono', monospace;
+            text-transform: uppercase;
+            font-size: 0.8rem; /* Disesuaikan untuk mobile */
+            letter-spacing: 0.8px;
+        }
+        .nav-link-futuristic .nav-text { position: relative; z-index: 1;}
+        .nav-link-futuristic::before, .nav-link-futuristic::after { 
+            content: attr(data-text);
+            position: absolute;
+            top: 10px; left: 8px;
+            width: 100%; height: 100%;
+            background: var(--bg-deep-space); 
+            overflow: hidden;
+            clip-path: inset(0);
+        }
+        .nav-link-futuristic:hover .nav-text { color: var(--glow-accent); }
+        .nav-link-futuristic:hover::before {
+            text-shadow: -1px 0 var(--glow-primary);
+            animation: glitch-anim-1 0.35s infinite linear alternate-reverse; 
+        }
+        .nav-link-futuristic:hover::after {
+            text-shadow: 1px 0 var(--glow-secondary);
+            animation: glitch-anim-2 0.35s infinite linear alternate-reverse;
+        }
+        @keyframes glitch-anim-1 {
+            0% { clip-path: inset(10% 0 80% 0); } 20% { clip-path: inset(40% 0 20% 0); }
+            40% { clip-path: inset(90% 0 5% 0); } 60% { clip-path: inset(25% 0 70% 0); }
+            80% { clip-path: inset(0 0 95% 0); } 100% { clip-path: inset(60% 0 10% 0); }
+        }
+        @keyframes glitch-anim-2 {
+            0% { clip-path: inset(70% 0 5% 0); } 20% { clip-path: inset(10% 0 85% 0); }
+            40% { clip-path: inset(50% 0 30% 0); } 60% { clip-path: inset(95% 0 2% 0); }
+            80% { clip-path: inset(30% 0 60% 0); } 100% { clip-path: inset(80% 0 15% 0); }
+        }
+
+
+        /* --- Animated Floating WA Button --- */
+        .floating-wa-futuristic {
+            position: fixed; bottom: 20px; right: 20px; z-index: 1000; /* Posisi disesuaikan untuk mobile */
+            animation: scanWaButton 2.8s infinite linear; 
+            border-radius: 50%;
+        }
+        .floating-wa-futuristic::before { 
+            content: '';
+            position: absolute;
+            inset: -6px; /* Disesuaikan */
+            border: 1.5px solid var(--glow-primary); 
+            border-radius: 50%;
+            opacity: 0;
+            animation: scanRing 2.8s infinite linear; 
+        }
+        @keyframes scanWaButton { 
+            0%, 100% { transform: scale(1); box-shadow: 0 0 10px var(--glow-primary); }
+            50% { transform: scale(1.05); box-shadow: 0 0 25px var(--glow-primary); }
+        }
+        @keyframes scanRing { 
+            0% { transform: scale(0.6); opacity: 0.7; }
+            70%, 100% { transform: scale(1.4); opacity: 0; }
+        }
+
+        /* --- Abstract Particles --- */
+        .abstract-particles { 
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 0;
+        }
+        .abstract-particle {
+            position: absolute;
+            border-radius: 1px; 
+            animation: driftAndFade 40s infinite ease-in-out; 
+            opacity: 0;
+            background-color: var(--glow-primary);
+            box-shadow: 0 0 6px var(--glow-primary); 
+        }
+        @keyframes driftAndFade {
+            0% { transform: translateY(20vh) translateX(0vw) scale(0.5) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translateY(-25vh) translateX(calc(var(--direction) * 15vw)) scale(1.2) rotate(calc(var(--direction) * 45deg)); opacity: 0.3; }
+            90% { opacity: 0.6; }
+            100% { transform: translateY(20vh) translateX(0vw) scale(0.5) rotate(0deg); opacity: 0; }
+        }
+
+
+        /* --- Hyperdrive Scrollbar --- */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep-space); }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--glow-primary), var(--glow-secondary));
+            border-radius: 6px;
+            box-shadow: 0 0 5px var(--glow-primary) inset;
+        }
+
+        /* --- "About Us" Image Portal Effect --- */
+        .about-image-portal {
+            position: relative;
+            filter: drop-shadow(0 12px 30px rgba(0,0,0,0.55)); 
+        }
+        .about-image-futuristic {
+            border-radius: 1rem; 
+            box-shadow: 0 0 25px -8px var(--glow-primary); 
+            transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.7s ease; 
+            transform: perspective(1800px) rotateY(-8deg) rotateX(4deg) scale(0.92); 
+            border: 1.5px solid var(--border-color-light); 
+        }
+        .about-image-portal:hover .about-image-futuristic {
+            transform: perspective(1800px) rotateY(0deg) rotateX(0deg) scale(1.02);
+            box-shadow: 0 0 45px 0px var(--glow-primary), 0 0 18px 0px var(--glow-secondary);
+            border-color: rgba(0, 242, 234, 0.6);
+        }
+
+        /* --- Section Styling --- */
+        #layanan { background-color: var(--bg-nebula); }
+        #tentang { background-color: var(--bg-deep-space); }
+        #gabung {
+            background: linear-gradient(145deg, #0d1a3a 0%, var(--bg-nebula) 50%, var(--bg-deep-space) 100%);
+            position: relative;
+        }
+        footer {
+             background-color: #010205; 
+             border-top: 1px solid rgba(0, 242, 234, 0.08); 
+        }
+        .scroll-reveal-futuristic {
+            opacity: 0;
+            transform: translateY(30px); 
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1); 
+        }
+        .scroll-reveal-futuristic.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="antialiased">
+
+    <header class="sticky-header sticky top-0 z-50">
+        <div class="container mx-auto px-4 sm:px-6 py-3.5 flex justify-between items-center">
+            <a href="#hero" class="flex items-center space-x-2 sm:space-x-3 rtl:space-x-reverse text-2xl sm:text-3xl font-orbitron font-bold text-white">
+                <img src="logo.jpg" class="h-6 sm:h-8" alt="Logo IT Enthusiast" /> <span>IT <span class="text-[var(--glow-primary)]">Enthusiast</span></span>
+            </a>
+            <nav class="hidden md:flex space-x-5 lg:space-x-6"> <a href="#hero" class="nav-link-futuristic text-gray-300" data-text="Beranda"><span class="nav-text">Beranda</span></a>
+                <a href="#layanan" class="nav-link-futuristic text-gray-300" data-text="Layanan"><span class="nav-text">Layanan</span></a>
+                <a href="#tentang" class="nav-link-futuristic text-gray-300" data-text="Tentang Kami"><span class="nav-text">Tentang Kami</span></a>
+                <a href="#gabung" class="nav-link-futuristic text-gray-300" data-text="Gabung"><span class="nav-text">Gabung</span></a>
+            </nav>
+            <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="hidden md:inline-block btn-whatsapp-futuristic btn-quantum font-semibold px-5 py-2.5 lg:px-7 lg:py-3 rounded-lg text-xs sm:text-sm"> <span class="btn-text"><i class="fab fa-whatsapp mr-1.5 sm:mr-2"></i>Kontak Kami</span>
+                <span class="btn-flare"></span>
+            </a>
+            <button id="mobileMenuButton" class="md:hidden text-gray-200 focus:outline-none">
+                <i class="fas fa-atom text-2xl"></i> 
+            </button>
+        </div>
+        <div id="mobileMenu" class="hidden md:hidden bg-opacity-95 backdrop-blur-xl" style="background-color: rgba(2, 4, 10, 0.98);">
+            <a href="#hero" class="block px-6 py-4 text-gray-300 hover:bg-[var(--bg-nebula)] hover:text-[var(--glow-primary)] font-roboto-mono">Beranda_</a>
+            <a href="#layanan" class="block px-6 py-4 text-gray-300 hover:bg-[var(--bg-nebula)] hover:text-[var(--glow-primary)] font-roboto-mono">Layanan_</a>
+            <a href="#tentang" class="block px-6 py-4 text-gray-300 hover:bg-[var(--bg-nebula)] hover:text-[var(--glow-primary)] font-roboto-mono">Tentang_Kami_</a>
+            <a href="#gabung" class="block px-6 py-4 text-gray-300 hover:bg-[var(--bg-nebula)] hover:text-[var(--glow-primary)] font-roboto-mono">Gabung_</a>
+            <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="block px-6 py-4 btn-whatsapp-futuristic btn-quantum text-center font-semibold m-5 rounded-lg text-sm">
+                <span class="btn-text"><i class="fab fa-whatsapp mr-2"></i>Kontak Kami</span>
+                <span class="btn-flare"></span>
+            </a>
+        </div>
+    </header>
+
+    <section id="hero" class="hero-section text-white px-4 sm:px-6"> <canvas id="hero-plexus-container"></canvas>
+        <div class="abstract-particles" id="abstract-particles-container"></div>
+        <div class="hero-content max-w-5xl mx-auto text-center"> 
+            <h1 id="heroHeadline" class="hero-headline font-orbitron font-black mb-8 sm:mb-10">
+                </h1>
+            <p class="hero-subheadline text-[var(--text-muted-galaxy)] mb-10 sm:mb-12 max-w-3xl mx-auto leading-relaxed scroll-reveal-futuristic" style="transition-delay: 1s;">
+                Akselerasi potensi digital Anda. Selami Jaringan Kuantum, AI Generatif, Keamanan Siber Holistik, dan Komputasi Edge bersama para visioner di IT Enthusiast.
+            </p>
+            <a href="#layanan" class="btn-primary-futuristic btn-quantum font-bold px-8 py-3.5 sm:px-10 sm:py-4 rounded-xl shadow-2xl inline-flex items-center text-sm sm:text-base scroll-reveal-futuristic" style="transition-delay: 1.5s;">
+                <span class="btn-text"><i class="fas fa-rocket-launch mr-2 sm:mr-3"></i>Mulai Eksplorasi</span>
+                <span class="btn-flare"></span>
+            </a>
+        </div>
+    </section>
+
+    <section id="layanan" class="py-24 md:py-36"> <div class="container mx-auto px-4 sm:px-6">
+            <h2 class="section-title-futuristic text-center mb-20 md:mb-28 scroll-reveal-futuristic">Dimensi Keahlian Kami</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-10 lg:gap-14"> <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.1s;">
+                    <div class="holographic-card-content">
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-atom-simple"></i></div>
+                        <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">Jaringan & Infrastruktur</h3>
+                        <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Arsitektur P2P, blockchain, dan simulasi jaringan masa depan.</p>
+                    </div>
+                </div>
+                <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.25s;">
+                     <div class="holographic-card-content">
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-brain-circuit"></i></div>
+                        <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">AI & Machine Learning</h3>
+                        <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Model generatif, seni AI, dan sistem AI yang mampu belajar adaptif.</p>
+                    </div>
+                </div>
+                <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.4s;">
+                     <div class="holographic-card-content">
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-shield-keyhole"></i></div>
+                        <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">Keamanan Siber</h3>
+                        <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Zero Trust Architecture, kriptografi modern, dan Threat Intelligence.</p>
+                    </div>
+                </div>
+                <div class="holographic-card p-6 sm:p-8 text-center scroll-reveal-futuristic" style="transition-delay: 0.55s;">
+                     <div class="holographic-card-content">
+                        <div class="mb-6 sm:mb-8 card-icon-futuristic text-[var(--glow-primary)]"><i class="fas fa-satellite-dish"></i></div>
+                        <h3 class="text-lg sm:text-xl font-orbitron font-semibold mb-3 sm:mb-4 text-white">Cloud Computing & Edge</h3>
+                        <p class="text-[var(--text-muted-galaxy)] text-xs leading-relaxed font-roboto-mono">Federated Learning, arsitektur edge, dan jaringan sensor pintar.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang" class="py-24 md:py-36">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row items-center gap-16 md:gap-24">
+                <div class="md:w-1/2 relative about-image-portal scroll-reveal-futuristic">
+                    <img src="https://placehold.co/600x450/02040a/00f2ea?text=IE+Core" alt="Ilustrasi Inti Komunitas IT Enthusiast" class="about-image-futuristic w-full h-auto object-cover">
+                </div>
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="section-title-futuristic mb-10 md:mb-14 text-center md:text-left scroll-reveal-futuristic">Manifesto Kami: Meretas Masa Depan</h2>
+                    <p class="text-[var(--text-muted-galaxy)] mb-6 sm:mb-7 text-sm sm:text-base leading-relaxed font-roboto-mono scroll-reveal-futuristic" style="transition-delay: 0.2s;">
+                        IT Enthusiast adalah sebuah kolektif para perintis, inovator, dan pembelajar seumur hidup yang berdedikasi untuk membentuk lanskap teknologi hari esok. Kami bukan hanya mengikuti tren; kami menciptakannya.
+                    </p>
+                    <p class="text-[var(--text-muted-galaxy)] mb-7 sm:mb-9 text-sm sm:text-base leading-relaxed font-roboto-mono scroll-reveal-futuristic" style="transition-delay: 0.4s;">
+                        Misi kami adalah memberdayakan setiap individu dengan pengetahuan dan alat untuk berinovasi tanpa batas, mendorong batas-batas kemungkinan, dan membangun solusi yang berdampak global.
+                    </p>
+                    <ul class="space-y-4 sm:space-y-5 text-[var(--text-muted-galaxy)] text-xs sm:text-sm">
+                        <li class="flex items-center scroll-reveal-futuristic" style="transition-delay: 0.6s;"><i class="fas fa-infinity text-[var(--glow-accent)] mr-3 sm:mr-4 text-base sm:text-lg"></i> Pembelajaran Berkelanjutan & Eksplorasi Radikal</li>
+                        <li class="flex items-center scroll-reveal-futuristic" style="transition-delay: 0.7s;"><i class="fas fa-people-arrows text-[var(--glow-accent)] mr-3 sm:mr-4 text-base sm:text-lg"></i> Kolaborasi Terdesentralisasi & Open Source</li>
+                        <li class="flex items-center scroll-reveal-futuristic" style="transition-delay: 0.8s;"><i class="fas fa-light-switch-on text-[var(--glow-accent)] mr-3 sm:mr-4 text-base sm:text-lg"></i> Inovasi Disruptif & Proyek Pionir</li>
+                        <li class="flex items-center scroll-reveal-futuristic" style="transition-delay: 0.9s;"><i class="fas fa-user-astronaut text-[var(--glow-accent)] mr-3 sm:mr-4 text-base sm:text-lg"></i> Komunitas Visioner & Inklusif Global</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gabung" class="py-24 md:py-36 text-white">
+        <div class="container mx-auto px-4 sm:px-6 text-center">
+            <div class="mb-10 sm:mb-12 scroll-reveal-futuristic">
+                <i class="fas fa-qrcode text-7xl sm:text-8xl text-[var(--glow-accent)]"></i>
+                <span class="block text-xs font-roboto-mono mt-2 text-[var(--text-muted-galaxy)]">// DECODE_YOUR_FUTURE</span>
+            </div>
+            <h2 class="section-title-futuristic mb-8 sm:mb-9 scroll-reveal-futuristic">Aktifkan Potensi Anda. Gabung IT Enthusiast.</h2>
+            <p class="text-sm sm:text-base md:text-lg text-[var(--text-muted-galaxy)] mb-12 sm:mb-14 max-w-3xl mx-auto leading-relaxed font-roboto-mono scroll-reveal-futuristic" style="transition-delay: 0.2s;">
+                Pintu menuju singularitas teknologi berikutnya terbuka. Apakah Anda siap melangkah? Bergabunglah dengan jaringan para pemikir dan pembangun masa depan.
+            </p>
+            <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="btn-whatsapp-futuristic btn-quantum font-bold px-10 py-4 sm:px-12 sm:py-5 rounded-xl shadow-2xl inline-flex items-center text-base sm:text-lg scroll-reveal-futuristic" style="transition-delay: 0.4s;">
+                <span class="btn-text"><i class="fab fa-whatsapp text-xl sm:text-2xl mr-2 sm:mr-3"></i>Hubungkan ke Komunitas</span>
+                <span class="btn-flare"></span>
+            </a>
+        </div>
+    </section>
+
+    <a href="https://chat.whatsapp.com/IjCgR5KNcoe9hkDUYMpwn4" target="_blank" class="floating-wa-futuristic btn-whatsapp-futuristic btn-quantum p-3 sm:p-3.5 rounded-full shadow-2xl flex items-center justify-center text-white text-xl sm:text-2xl">
+        <span class="btn-text"><i class="fab fa-whatsapp"></i></span>
+        <span class="btn-flare"></span>
+    </a>
+
+    <footer class="py-14 sm:py-16 text-center">
+        <div class="container mx-auto px-4 sm:px-6">
+            <p class="text-[var(--text-muted-galaxy)] font-roboto-mono text-xs">&copy; <span id="currentYear"></span> IT ENTHUSIAST PROTOCOL. ALL RIGHTS RESERVED.</p>
+            <p class="text-gray-700 text-xs mt-3 font-roboto-mono">
+                SYSTEM_DESIGN <i class="fas fa-code text-[var(--glow-primary)]"></i> // HUMAN_HEART <i class="fas fa-heart text-pink-700"></i> // ENTHUSIAST_CORE
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuButton = document.getElementById('mobileMenuButton');
+        const mobileMenu = document.getElementById('mobileMenu');
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Smooth scroll with offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                if (mobileMenu && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                }
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    const headerOffset = document.querySelector('header.sticky-header')?.offsetHeight || 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+                    window.scrollTo({ top: offsetPosition, behavior: "smooth" });
+                }
+            });
+        });
+        
+        const currentYearElement = document.getElementById('currentYear');
+        if (currentYearElement) currentYearElement.textContent = new Date().getFullYear();
+
+        // Plexus Network Background for Hero
+        const canvas = document.getElementById('hero-plexus-container');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let particlesArray;
+
+            // Debounce resize function
+            let resizeTimeout;
+            function debouncedResize() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                initPlexus();
+            }
+
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(debouncedResize, 100); // Adjust debounce delay as needed
+            });
+
+
+            class ParticlePlexus {
+                constructor(x, y) {
+                    this.x = x; this.y = y;
+                    this.size = Math.random() * 1.5 + 0.5; 
+                    this.speedX = Math.random() * 0.25 - 0.125; // Kecepatan lebih lambat lagi
+                    this.speedY = Math.random() * 0.25 - 0.125;
+                    this.color = 'rgba(0, 242, 234, 0.4)'; 
+                }
+                update() {
+                    if (this.x + this.size > canvas.width || this.x - this.size < 0) this.speedX = -this.speedX;
+                    if (this.y + this.size > canvas.height || this.y - this.size < 0) this.speedY = -this.speedY;
+                    this.x += this.speedX; this.y += this.speedY;
+                }
+            }
+
+            function initPlexus() {
+                particlesArray = [];
+                let baseParticleDensity = 25000; // Higher number = fewer particles
+                if (window.innerWidth < 768) { // Fewer particles on mobile
+                    baseParticleDensity = 35000;
+                }
+                let numberOfParticles = (canvas.height * canvas.width) / baseParticleDensity; 
+                for (let i = 0; i < numberOfParticles; i++) {
+                    let x = Math.random() * canvas.width;
+                    let y = Math.random() * canvas.height;
+                    particlesArray.push(new ParticlePlexus(x, y));
+                }
+            }
+
+            function connectPlexus() {
+                let opacityValue = 1;
+                let connectionDistanceFactor = window.innerWidth < 768 ? 12 : 10; // Shorter connection distance on mobile
+                for (let a = 0; a < particlesArray.length; a++) {
+                    for (let b = a; b < particlesArray.length; b++) {
+                        let distance = ((particlesArray[a].x - particlesArray[b].x) * (particlesArray[a].x - particlesArray[b].x))
+                                     + ((particlesArray[a].y - particlesArray[b].y) * (particlesArray[a].y - particlesArray[b].y));
+                        
+                        if (distance < (canvas.width / connectionDistanceFactor) * (canvas.height / connectionDistanceFactor)) { 
+                            opacityValue = 1 - (distance / 22000); // Opasitas garis disesuaikan
+                            ctx.strokeStyle = `rgba(0, 242, 234, ${opacityValue * 0.12})`; // Garis lebih halus lagi
+                            ctx.lineWidth = 0.25; // Garis sangat tipis
+                            ctx.beginPath();
+                            ctx.moveTo(particlesArray[a].x, particlesArray[a].y);
+                            ctx.lineTo(particlesArray[b].x, particlesArray[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+            
+            let lastFrameTime = 0;
+            const targetFrameTime = 1000 / 45; // Target 45 FPS
+
+            function animatePlexus(currentTime) {
+                requestAnimationFrame(animatePlexus);
+                const deltaTime = currentTime - lastFrameTime;
+
+                if (deltaTime < targetFrameTime) {
+                    return; // Skip frame if too soon
+                }
+                lastFrameTime = currentTime - (deltaTime % targetFrameTime);
+
+
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particlesArray.length; i++) {
+                    particlesArray[i].update();
+                }
+                connectPlexus();
+            }
+            
+            // Initial setup
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            initPlexus();
+            requestAnimationFrame(animatePlexus);
+        }
+
+
+        // Abstract Particles
+        const abstractParticlesContainer = document.getElementById('abstract-particles-container');
+        if (abstractParticlesContainer) {
+            const numAbstractParticles = window.innerWidth < 768 ? 15 : 25; // Fewer on mobile
+            for (let i = 0; i < numAbstractParticles; i++) {
+                let p = document.createElement('div');
+                p.classList.add('abstract-particle');
+                const sizeX = Math.random() * 2.5 + 0.5; 
+                const sizeY = Math.random() * 12 + 4; 
+                p.style.width = `${sizeX}px`;
+                p.style.height = `${sizeY}px`;
+                p.style.top = `${Math.random() * 100}%`;
+                p.style.left = `${Math.random() * 100}%`;
+                p.style.setProperty('--direction', Math.random() > 0.5 ? 1 : -1);
+                p.style.animationDuration = `${Math.random() * 28 + 35}s`; 
+                p.style.animationDelay = `${Math.random() * -35}s`;
+                if (Math.random() > 0.65) p.style.backgroundColor = 'var(--glow-secondary)'; 
+                abstractParticlesContainer.appendChild(p);
+            }
+        }
+
+        // Hero Headline Text Animation
+        const heroHeadline = document.getElementById('heroHeadline');
+        if (heroHeadline) {
+            const textContent = "IT Enthusiast: Meretas Realitas Digital"; 
+            const words = textContent.split(" ");
+            
+            heroHeadline.innerHTML = words.map(word => 
+                `<span class="word">${word.split('').map(char => `<span class="char">${char}</span>`).join('')}</span>`
+            ).join('');
+
+            const chars = heroHeadline.querySelectorAll('.char');
+            if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) { // Cek preferensi animasi
+                chars.forEach((char, i) => {
+                    const delay = i * 50 + Math.random() * 70 + 200; // Delay sedikit lebih cepat
+                    setTimeout(() => {
+                        char.style.opacity = '1';
+                        char.style.transform = 'translateY(0) skewY(0deg) scale(1)';
+                        char.animate([
+                            { opacity: 0, filter: 'blur(3px)' }, 
+                            { opacity: 1, filter: 'blur(0)' }
+                        ], { duration: 300, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }); 
+                    }, delay);
+                });
+            } else { // Jika pengguna preferensi reduced motion
+                chars.forEach(char => {
+                    char.style.opacity = '1';
+                    char.style.transform = 'translateY(0) skewY(0deg) scale(1)';
+                });
+            }
+            heroHeadline.classList.add('scroll-reveal-futuristic'); 
+        }
+
+        // Intersection Observer for general scroll reveal animations
+        if (typeof IntersectionObserver !== 'undefined') {
+            const revealElements = document.querySelectorAll('.scroll-reveal-futuristic');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        if (window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+                            entry.target.classList.add('revealed');
+                        } else {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                    }
+                });
+            }, { threshold: 0.05 }); // Threshold lebih kecil agar animasi lebih cepat terlihat di mobile
+            revealElements.forEach(el => {
+                if (!window.matchMedia("(prefers-reduced-motion: no-preference)").matches) {
+                     el.style.opacity = '1'; // Tampilkan langsung jika reduced motion
+                     el.style.transform = 'translateY(0)';
+                } else {
+                    observer.observe(el);
+                }
+            });
+        } else { // Fallback jika IO tidak didukung
+            document.querySelectorAll('.scroll-reveal-futuristic').forEach(el => {
+                el.style.opacity = '1';
+                el.style.transform = 'translateY(0)';
+            });
+        }
+
+    </script>
+</body>
+</html>
